@@ -6,52 +6,11 @@ using System.Threading.Tasks;
 
 namespace AntonioStd.Collections.Range
 {
-    public class ClosedOpenRange : IRange
+    public class ClosedOpenRange : AbstractRange
     {
-        public int Start { get; }
-
-        public int End { get; }
-
-        public ClosedOpenRange(int start, int end)
+        internal ClosedOpenRange(int start, int end) : base(start, end - 1)
         {
-            Start = start;
-            End = end - 1;
-        }
 
-        public bool Contains(int value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Count()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IIterator<int> GetIterator()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int[] ToArray()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool Equals(object obj)
-        {
-            var range = obj as ClosedOpenRange;
-            return range != null &&
-                   Start == range.Start &&
-                   End == range.End;
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = -1676728671;
-            hashCode = hashCode * -1521134295 + Start.GetHashCode();
-            hashCode = hashCode * -1521134295 + End.GetHashCode();
-            return hashCode;
         }
     }
 }

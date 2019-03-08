@@ -11,7 +11,7 @@ namespace AntonioStd.Collections.Range.Tests
     [TestClass()]
     public class ClosedClosedRangeTests
     {
-        private ClosedClosedRange testInstance = new ClosedClosedRange(0, 5);
+        private IRange testInstance = Ranges.ClosedClosed(0, 5);
 
         [TestMethod()]
         public void GivenMediumRangeValue_WhenContains_ThenTrueReturned()
@@ -26,7 +26,7 @@ namespace AntonioStd.Collections.Range.Tests
         }
 
         [TestMethod()]
-        public void GivenUpperBoundmRangeValue_WhenContains_ThenTrueReturned()
+        public void GivenUpperBoundRangeValue_WhenContains_ThenTrueReturned()
         {
             Assert.IsTrue(testInstance.Contains(5));
         }
@@ -34,13 +34,13 @@ namespace AntonioStd.Collections.Range.Tests
         [TestMethod()]
         public void GivenLessThenLowerBoundValue_WhenContains_ThenFalseReturned()
         {
-            Assert.IsTrue(testInstance.Contains(-1));
+            Assert.IsFalse(testInstance.Contains(-1));
         }
 
         [TestMethod()]
         public void GivenBiggerThenUpperBoundmRangeValue_WhenContains_ThenFalseReturned()
         {
-            Assert.IsTrue(testInstance.Contains(6));
+            Assert.IsFalse(testInstance.Contains(6));
         }
 
 

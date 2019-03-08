@@ -11,7 +11,7 @@ namespace AntonioStd.Collections.Range.Tests
     [TestClass()]
     public class ClosedOpenRangeTests
     {
-        private ClosedOpenRange testInstance = new ClosedOpenRange(0, 5);
+        private IRange testInstance = Ranges.ClosedOpen(0, 5);
 
         [TestMethod()]
         public void GivenMediumRangeValue_WhenContains_ThenTrueReturned()
@@ -34,18 +34,18 @@ namespace AntonioStd.Collections.Range.Tests
         [TestMethod()]
         public void GivenLessThenLowerBoundValue_WhenContains_ThenFalseReturned()
         {
-            Assert.IsTrue(testInstance.Contains(-1));
+            Assert.IsFalse (testInstance.Contains(-1));
         }
 
         [TestMethod()]
         public void GivenBiggerThenUpperBoundmRangeValue_WhenContains_ThenFalseReturned()
         {
-            Assert.IsTrue(testInstance.Contains(5));
+            Assert.IsFalse(testInstance.Contains(5));
         }
 
 
         [TestMethod()]
-        public void GivenClosedClosedRange_WhenCount_ThenReturnCount()
+        public void GivenClosedOpenRange_WhenCount_ThenReturnCount()
         {
             int actual = testInstance.Count();
 
@@ -53,7 +53,7 @@ namespace AntonioStd.Collections.Range.Tests
         }
 
         [TestMethod()]
-        public void GivenClosedCloseRange_WhenGetIterator_ThenRangeIsIterated()
+        public void GivenClosedOpenRange_WhenGetIterator_ThenRangeIsIterated()
         {
             IIterator<int> iterator = testInstance.GetIterator();
 
@@ -63,12 +63,12 @@ namespace AntonioStd.Collections.Range.Tests
             {
                 int currentElement = iterator.Next();
 
-                Assert.AreEqual(counter++ - 1, currentElement);
+                Assert.AreEqual(counter++, currentElement);
             }
         }
 
         [TestMethod()]
-        public void GivenClosedClosedRange_WhenToArray_ThenRangeIsArrayed()
+        public void GivenClosedOpenRange_WhenToArray_ThenRangeIsArrayed()
         {
             int[] actual = testInstance.ToArray();
 

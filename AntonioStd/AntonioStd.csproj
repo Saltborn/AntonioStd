@@ -51,10 +51,12 @@
     <Compile Include="Collections\IMutableMap.cs" />
     <Compile Include="Collections\IMutableSet.cs" />
     <Compile Include="Collections\IStack.cs" />
+    <Compile Include="Collections\Range\AbstractRange.cs" />
     <Compile Include="Collections\Range\ClosedClosedRange.cs" />
     <Compile Include="Collections\Range\ClosedOpenRange.cs" />
     <Compile Include="Collections\Range\OpenClosedRange.cs" />
     <Compile Include="Collections\Range\OpenOpenRange.cs" />
+    <Compile Include="Collections\Range\Ranges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Collections\ISet.cs" />
     <Compile Include="Collections\IQueue.cs" />
