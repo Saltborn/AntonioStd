@@ -9,9 +9,37 @@ using System.Threading.Tasks;
 namespace AntonioStd.Collections.Range.Tests
 {
     [TestClass()]
-    public class ClosedClosedRangeTests
+    public class RangeTests
     {
-        private IRange testInstance = Ranges.ClosedClosed(0, 5);
+        private IRange testInstance = Range.ClosedClosed(0, 5);
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GivenRanges_WhenClosedClosed_ThenArgumentExeptionThrown()
+        {
+            Range.ClosedClosed(5, 0);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GivenRanges_WhenOpenClosed_ThenArgumentExeptionThrown()
+        {
+            Range.OpenClosed(5, 0);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GivenRanges_WhenClosedOpen_ThenArgumentExeptionThrown()
+        {
+            Range.ClosedOpen(5, 0);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GivenRanges_WhenOpenOpen_ThenArgumentExeptionThrown()
+        {
+            Range.OpenOpen(5, 0);
+        }
 
         [TestMethod()]
         public void GivenMediumRangeValue_WhenContains_ThenTrueReturned()
@@ -42,7 +70,6 @@ namespace AntonioStd.Collections.Range.Tests
         {
             Assert.IsFalse(testInstance.Contains(6));
         }
-
 
         [TestMethod()]
         public void GivenClosedClosedRange_WhenCount_ThenReturnCount()

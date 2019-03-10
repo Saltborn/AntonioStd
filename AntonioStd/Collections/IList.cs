@@ -8,6 +8,6 @@ namespace AntonioStd.Collections
 {
     public interface IList<T> : ICollection<T>
     {
-        T Get(int inex);
+        T Get(int index);
     }
 }

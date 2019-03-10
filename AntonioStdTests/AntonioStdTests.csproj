@@ -56,11 +56,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Collections\Range\ClosedClosedRangeTests.cs" />
-    <Compile Include="Collections\Range\ClosedOpenRangeTests.cs" />
-    <Compile Include="Collections\Range\OpenClosedRangeTests.cs" />
-    <Compile Include="Collections\Range\OpenOpenRangeTests.cs" />
-    <Compile Include="Collections\Range\RangesTests.cs" />
+    <Compile Include="Collections\List\ArrayListTests.cs" />
+    <Compile Include="Collections\Range\RangeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

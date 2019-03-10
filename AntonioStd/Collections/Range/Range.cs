@@ -6,16 +6,59 @@ using System.Threading.Tasks;
 
 namespace AntonioStd.Collections.Range
 {
-    public abstract class AbstractRange : IRange
+    public class Range : IRange, IEquatable<Range>
     {
         public int Start { get; }
 
         public int End { get; }
 
-        protected internal AbstractRange(int start, int end)
+        protected internal Range(int start, int end)
         {
             Start = start;
             End = end;
+        }
+
+        public static IRange ClosedClosed(int start, int end)
+        {
+            if (start > end)
+            {
+                throw new ArgumentException($"End should be less or equal to the Start. Current: start = $start, end = $end");
+            }
+            return new Range(start, end);
+        }
+
+        public static IRange OpenOpen(int start, int end)
+        {
+            int realStart = start + 1;
+            int realEnd = end - 1;
+
+            if (realStart > realEnd)
+            {
+                throw new ArgumentException($"End should be less or equal to the Start. Current: start = $start, end = $end");
+            }
+            return new Range(realStart, realEnd);
+        }
+
+        public static IRange ClosedOpen(int start, int end)
+        {
+            int realEnd = end - 1;
+
+            if (start > realEnd)
+            {
+                throw new ArgumentException($"End should be less or equal to the Start. Current: start = $start, end = $end");
+            }
+            return new Range(start, realEnd);
+        }
+
+        public static IRange OpenClosed(int start, int end)
+        {
+            int realSrart = start + 1;
+
+            if (realSrart > end)
+            {
+                throw new ArgumentException($"End should be less or equal to the Start. Current: start = $start, end = $end");
+            }
+            return new Range(realSrart, end);
         }
 
         public bool Contains(int value)
@@ -50,10 +93,14 @@ namespace AntonioStd.Collections.Range
 
         public override bool Equals(object obj)
         {
-            var range = obj as ClosedClosedRange;
-            return range != null &&
-                   Start == range.Start &&
-                   End == range.End;
+            return Equals(obj as Range);
+        }
+
+        public bool Equals(Range other)
+        {
+            return other != null &&
+                   Start == other.Start &&
+                   End == other.End;
         }
 
         public override int GetHashCode()

@@ -8,6 +8,8 @@ namespace AntonioStd.Collections
 {
     public interface IMutableList<T> : IList<T>, IMutableCollection<T>
     {
-        IMutableList<T> Insert(T value);
+        void Insert(int index, T value);
+
+        void Set(int index, T value);
     }
 }

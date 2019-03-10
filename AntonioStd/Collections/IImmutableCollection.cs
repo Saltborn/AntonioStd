@@ -8,10 +8,10 @@ namespace AntonioStd.Collections
 {
    public interface IMutableCollection<T> : ICollection<T>
     {
-        IMutableCollection<T> Add(T value);
+        void Add(T value);
 
         void Clear();
 
-        void Remove(T value);
+        void Remove(int index);
     }
 }
