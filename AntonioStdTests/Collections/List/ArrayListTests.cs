@@ -55,7 +55,7 @@ namespace AntonioStd.Collections.List.Tests
         {
             ArrayList<int> testInstance = ArrayList<int>.Of(1, 2, 3, 4, 5);
 
-            Assert.AreEqual(2, testInstance.Get(2));
+            Assert.AreEqual(2, testInstance.Get(1));
         }
 
         [TestMethod()]
@@ -64,7 +64,7 @@ namespace AntonioStd.Collections.List.Tests
             ArrayList<int> actual = ArrayList<int>.Of(1, 2, 3, 4, 5);
             ArrayList<int> expected = ArrayList<int>.Of(1, 8, 3, 4, 5);
 
-            actual.Set(2, 8);
+            actual.Set(1, 8);
 
             Assert.AreEqual(expected, actual);
         }
@@ -76,7 +76,7 @@ namespace AntonioStd.Collections.List.Tests
 
             IIterator<int> iterator = testInstance.GetIterator();
 
-            int counter = 0;
+            int counter = 1;
 
             while (iterator.HasNext())
             {
@@ -92,7 +92,7 @@ namespace AntonioStd.Collections.List.Tests
             ArrayList<int> actual = ArrayList<int>.Of(1, 2, 3, 4, 5);
             ArrayList<int> expected = ArrayList<int>.Of(1, 2, 6, 3, 4, 5);
 
-            actual.Insert(3, 6);
+            actual.Insert(2, 6);
 
             Assert.AreEqual(expected, actual);
         }
@@ -103,7 +103,7 @@ namespace AntonioStd.Collections.List.Tests
             ArrayList<int> actual = ArrayList<int>.Of(1, 2, 3, 4, 5);
             ArrayList<int> expected = ArrayList<int>.Of(1, 2, 4, 5);
 
-            actual.Remove(3);
+            actual.Remove(2);
 
             Assert.AreEqual(expected, actual);
         }

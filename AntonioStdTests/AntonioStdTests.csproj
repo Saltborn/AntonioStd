@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Collections\List\ArrayListTests.cs" />
+    <Compile Include="Collections\List\LinkedListTests.cs" />
     <Compile Include="Collections\Range\RangeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
