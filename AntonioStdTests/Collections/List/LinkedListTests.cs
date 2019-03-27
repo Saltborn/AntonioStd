@@ -71,6 +71,14 @@ namespace AntonioStd.Collections.List.Tests
         }
 
         [TestMethod()]
+        public void GivenLinkedList_WhenReverseGet_ThenTrueListElement()
+        {
+            LinkedList<int> testInstance = LinkedList<int>.Of(1, 2, 3, 4, 5);
+
+            Assert.AreEqual(4, testInstance.Get(3));
+        }
+
+        [TestMethod()]
         public void GivenLinkedList_WhenSet_ThenTrueSetValue()
         {
             LinkedList<int> actual = LinkedList<int>.Of(1, 2, 3, 4, 5);

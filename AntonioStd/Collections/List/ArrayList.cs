@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntonioStd.Collections.Iterator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -209,9 +210,8 @@ namespace AntonioStd.Collections.List
             return stringBuilder.Append("]").ToString();
         }
 
-        class ArrayListIterator<E> : IIterator<E>
+        class ArrayListIterator<E> : AbstractForwardIterator<E>
         {
-            private int currentIndex = 0;
             private ArrayList<E> elements;
 
             public ArrayListIterator(ArrayList<E> elements)
@@ -219,14 +219,14 @@ namespace AntonioStd.Collections.List
                 this.elements = elements;
             }
 
-            public bool HasNext()
+            public override bool HasNext()
             {
-                return currentIndex < elements.Count();
+                return Index < elements.Count();
             }
 
-            public E Next()
+            protected override E InternalNext()
             {
-                return elements.Get(currentIndex++);
+                return elements.Get(Index);
             }
         }
     }

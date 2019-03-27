@@ -11,5 +11,7 @@ namespace AntonioStd.Collections
         bool HasNext();
 
         T Next();
+
+        int Index { get; }
     }
 }

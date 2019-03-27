@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntonioStd.Collections.Iterator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -111,7 +112,7 @@ namespace AntonioStd.Collections.Range
             return hashCode;
         }
 
-        private class RangeIterator : IIterator<int>
+        private class RangeIterator : AbstractForwardIterator<int>
         {
             private int currentElement;
             private int lastElement;
@@ -122,12 +123,12 @@ namespace AntonioStd.Collections.Range
                 this.lastElement = lastElement;
             }
 
-            public bool HasNext()
+            public override bool HasNext()
             {
                 return currentElement <= lastElement;
             }
 
-            public int Next()
+            protected override int InternalNext()
             {
                 return currentElement++;
             }
