@@ -7,28 +7,22 @@ using System.Threading.Tasks;
 
 namespace AntonioStd.Collections.List
 {
-    public class LinkedList<T> : IMutableList<T>, IEquatable<LinkedList<T>>
+    public class LinkedList<T> : AbstractCollection<T>, IMutableList<T>
     {
         private Node<T> head;
         private Node<T> tail;
-        private int count;
+        public override int Count { get; protected set; }
 
         private LinkedList(Node<T> head, Node<T> tail, int count)
         {
             this.head = head;
             this.tail = tail;
-            this.count = count;
+            this.Count = count;
         }
 
-        public static LinkedList<T> Of()
+        public static LinkedList<T> Of(params T[] values)
         {
-            return new LinkedList<T>(null, null, 0);
-        }
-
-        public static LinkedList<T> Of(T head, params T[] values)
-        {
-            LinkedList<T> linkedList = Of();
-            linkedList.Add(head);
+            LinkedList<T> linkedList = new LinkedList<T>(null, null, 0);
 
             foreach (T value in values)
             {
@@ -52,17 +46,17 @@ namespace AntonioStd.Collections.List
                 tail = newNode;
             }
 
-            count++;
+            Count++;
         }
 
         public void Clear()
         {
             head = null;
             tail = null;
-            count = 0;
+            Count = 0;
         }
 
-        public bool Contains(T value)
+        public override bool Contains(T value)
         {
             var iterator = GetIterator();
             while (iterator.HasNext())
@@ -77,24 +71,19 @@ namespace AntonioStd.Collections.List
             return false;
         }
 
-        public int Count()
-        {
-            return count;
-        }
-
         public T Get(int index)
         {
             return GetNode(index).Value;
         }
 
-        public IIterator<T> GetIterator()
+        public override IIterator<T> GetIterator()
         {
             return new ForwardIterator<T>(head);
         }
 
         public IIterator<T> GetReverseIterator()
         {
-            return new ReverseIterator<T>(tail, count - 1);
+            return new ReverseIterator<T>(tail, Count - 1);
         }
 
         public void Insert(int index, T value)
@@ -112,7 +101,7 @@ namespace AntonioStd.Collections.List
                 currentNode.Previous = insertedNode;
             }
 
-            count++;
+            Count++;
         }
 
         public void Remove(int index)
@@ -129,7 +118,7 @@ namespace AntonioStd.Collections.List
                 currentNode.Next.Previous = currentNode.Previous;
             }
 
-            count--;
+            Count--;
         }
 
         public void Set(int index, T value)
@@ -137,32 +126,19 @@ namespace AntonioStd.Collections.List
             GetNode(index).Value = value;
         }
 
-        public T[] ToArray()
-        {
-            T[] array = new T[count];
-
-            var iterator = GetIterator();
-
-            while (iterator.HasNext())
-            {
-                array[iterator.Index] = iterator.Next();
-            }
-
-            return array;
-        }
 
         private Node<T> GetNode(int index)
         {
-            if (index < 0 || index >= count)
+            if (index < 0 || index >= Count)
             {
-                throw new IndexOutOfRangeException($"Expcected index in range from 0 to {count}. But got {index}");
+                throw new IndexOutOfRangeException($"Expcected index in range from 0 to {Count}. But got {index}");
             }
 
             Node<T> currentNode = null;
 
             AbstractLinkedListIterator<T> iterator;
 
-            if (index < count / 2)
+            if (index < Count / 2)
             {
                 iterator = getForwardLinkedListIterator();
             }
@@ -193,67 +169,7 @@ namespace AntonioStd.Collections.List
 
         private AbstractLinkedListIterator<T> getReversetLinkedListIterator()
         {
-            return new ReverseIterator<T>(tail, count - 1);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as LinkedList<T>);
-        }
-
-        public bool Equals(LinkedList<T> other)
-        {
-            if (count != other.count)
-            {
-                return false;
-            }
-
-            var iterator = new ZippedIterator<T, T>(GetIterator(), other.GetIterator());
-
-            while (iterator.HasNext())
-            {
-                (var first, var second) = iterator.Next();
-
-                if (!first.Equals(second))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = 0;
-
-            var iterator = GetIterator();
-
-            while (iterator.HasNext())
-            {
-                hashCode += iterator.Next().GetHashCode();
-            }
-
-            return hashCode;
-        }
-
-        public override string ToString()
-        {
-            StringBuilder stringBuilder = new StringBuilder("[ ");
-
-            var iterator = GetIterator();
-
-            while (iterator.HasNext())
-            {
-                stringBuilder.Append(iterator.Next());
-
-                if (iterator.HasNext())
-                {
-                    stringBuilder.Append(", ");
-                }
-            }
-
-            return stringBuilder.Append(" ]").ToString();
+            return new ReverseIterator<T>(tail, Count - 1);
         }
 
         private class Node<V>

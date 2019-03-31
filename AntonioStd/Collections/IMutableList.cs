@@ -11,5 +11,9 @@ namespace AntonioStd.Collections
         void Insert(int index, T value);
 
         void Set(int index, T value);
+
+        void Remove(int index);
+
+        void Add(T value);
     }
 }

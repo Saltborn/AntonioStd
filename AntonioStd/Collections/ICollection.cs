@@ -8,7 +8,7 @@ namespace AntonioStd.Collections
 {
     public interface ICollection<T> : IIterable<T>
     {
-        int Count();
+        int Count { get; }
 
         bool Contains(T value);
 

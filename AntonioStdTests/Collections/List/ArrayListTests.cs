@@ -5,116 +5,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AntonioStdTests.Collections.List.Test;
 
 namespace AntonioStd.Collections.List.Tests
 {
     [TestClass()]
-    public class ArrayListTests
+    public class ArrayListTests : AbstractMutableListTest
     {
-
-        [TestMethod()]
-        public void GivenArrayList_WhenAdd_ThenAddElement()
+        public override IMutableList<int> CrateEmptyTestInstance()
         {
-            ArrayList<int> actual = ArrayList<int>.Of(1, 2, 3, 4, 5 );
-            ArrayList<int> expected = ArrayList<int>.Of(1, 2, 3, 4, 5, 6);
-
-            actual.Add(6);
-
-            Assert.AreEqual(actual, expected);
+            return ArrayList<int>.Of();
         }
 
-        [TestMethod()]
-        public void GivenArrayList_WhenClear_ThenClearArray()
+        public override IMutableList<int> CrateExpectedInstance(params int[] values)
         {
-            ArrayList<int> actual = ArrayList<int>.Of(1, 2, 3, 4, 5);
-            ArrayList<int> expected = ArrayList<int>.Of();
-
-            actual.Clear();
-
-            Assert.AreEqual(expected, actual);
+            return ArrayList<int>.Of(values);
         }
 
-        [TestMethod()]
-        public void GivenArrayList_WhenContains_ThenTrueReturned()
+        public override IMutableList<int> CrateTestInstance()
         {
-            ArrayList<int> testInstance = ArrayList<int>.Of(1, 2, 3, 4, 5);
-
-            Assert.IsTrue(testInstance.Contains(3));
-        }
-
-        [TestMethod()]
-        public void GivenArrayList_WhenCount_ThenTrueReturned()
-        {
-            ArrayList<int> testInstance = ArrayList<int>.Of(1, 2, 3, 4, 5);
-
-            Assert.IsTrue(testInstance.Contains(5));
-        }
-
-        [TestMethod()]
-        public void GivenArrayList_WhenGet_ThenTrueListElement()
-        {
-            ArrayList<int> testInstance = ArrayList<int>.Of(1, 2, 3, 4, 5);
-
-            Assert.AreEqual(2, testInstance.Get(1));
-        }
-
-        [TestMethod()]
-        public void GivenArrayList_WhenSet_ThenTrueSetValue()
-        {
-            ArrayList<int> actual = ArrayList<int>.Of(1, 2, 3, 4, 5);
-            ArrayList<int> expected = ArrayList<int>.Of(1, 8, 3, 4, 5);
-
-            actual.Set(1, 8);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod()]
-        public void GivenArrayList_WhenGetItaror_ThenTrueListIsIterated()
-        {
-            ArrayList<int> testInstance = ArrayList<int>.Of(1, 2, 3, 4, 5);
-
-            IIterator<int> iterator = testInstance.GetIterator();
-
-            int counter = 1;
-
-            while (iterator.HasNext())
-            {
-                int currentElement = iterator.Next();
-
-                Assert.AreEqual(counter++, currentElement);
-            }
-        }
-
-        [TestMethod()]
-        public void GivenArrayList_WhenInsert_ThenInsertElement()
-        {
-            ArrayList<int> actual = ArrayList<int>.Of(1, 2, 3, 4, 5);
-            ArrayList<int> expected = ArrayList<int>.Of(1, 2, 6, 3, 4, 5);
-
-            actual.Insert(2, 6);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod()]
-        public void GivenArrayList_WhenRemove_ThenRemoveElement()
-        {
-            ArrayList<int> actual = ArrayList<int>.Of(1, 2, 3, 4, 5);
-            ArrayList<int> expected = ArrayList<int>.Of(1, 2, 4, 5);
-
-            actual.Remove(2);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod()]
-        public void GivenArrayList_WhenToArray_ThenListIsArrayed()
-        {
-            ArrayList<int> testInstance = ArrayList<int>.Of(1, 2, 3, 4, 5);
-            int[] expected = { 1, 2, 3, 4, 5 };
-
-            CollectionAssert.AreEqual(expected, testInstance.ToArray());
+            return ArrayList<int>.Of(0, 1, 2, 3, 4, 5);
         }
     }
 }

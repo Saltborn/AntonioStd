@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\AbstractCollection.cs" />
     <Compile Include="Collections\ICollection.cs" />
     <Compile Include="Collections\IImmutableCollection.cs" />
     <Compile Include="Collections\IMutableList.cs" />
@@ -62,6 +63,9 @@
     <Compile Include="Collections\ISet.cs" />
     <Compile Include="Collections\IQueue.cs" />
     <Compile Include="Collections\IRange.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Collections\Abst\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

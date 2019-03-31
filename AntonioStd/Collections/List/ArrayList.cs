@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace AntonioStd.Collections.List
 {
-    public class ArrayList<T> : IMutableList<T>, IEquatable<ArrayList<T>>
+    public class ArrayList<T> : AbstractCollection<T>, IMutableList<T>
     {
         private const double GROUGTH_COEFFICIENT = 1.5;
 
         private T[] innerArray;
-        private int count;
+        public override int Count { get; protected set; }
 
         private ArrayList(T[] innerArray, int count)
         {
             this.innerArray = innerArray;
-            this.count = count;
+            this.Count = count;
         }
 
         public static ArrayList<T> WithInitialCapacity(int capacity)
@@ -40,20 +40,20 @@ namespace AntonioStd.Collections.List
 
         private void expendArray()
         {
-            T[] innerProlongedArray = new T[(int)(count * GROUGTH_COEFFICIENT)];
+            T[] innerProlongedArray = new T[(int)(Count * GROUGTH_COEFFICIENT)];
 
-            Array.Copy(innerArray, 0, innerProlongedArray, 0, count);
+            Array.Copy(innerArray, 0, innerProlongedArray, 0, Count);
         }
 
         public void Add(T value)
         {
-            int addIndex = count;
+            int addIndex = Count;
 
             if (innerArray.Length > addIndex)
             {
                 innerArray[addIndex] = value;
 
-                count++;
+                Count++;
             }
             else
             {
@@ -61,18 +61,18 @@ namespace AntonioStd.Collections.List
 
                 innerArray[addIndex] = value;
 
-                count++;
+                Count++;
             }
         }
 
         public void Clear()
         {
-            count = 0;
+            Count = 0;
         }
 
-        public bool Contains(T value)
+        public override bool Contains(T value)
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < Count; i++)
             {
                 if (Equals(innerArray[i], value))
                 {
@@ -83,31 +83,27 @@ namespace AntonioStd.Collections.List
             return false;
         }
 
-        public int Count()
-        {
-            return count;
-        }
 
-        public IIterator<T> GetIterator()
+        public override IIterator<T> GetIterator()
         {
             return new ArrayListIterator<T>(this);
         }
 
         public void Insert(int index, T value)
         {
-            if (count < index)
+            if (Count < index)
             {
-                throw new IndexOutOfRangeException($"Invalid index Argument. Expected 0 < index > {count}. Actual index = {index}");
+                throw new IndexOutOfRangeException($"Invalid index Argument. Expected 0 < index > {Count}. Actual index = {index}");
             }
 
-            count++;
+            Count++;
 
             if (index + 1 >= innerArray.Length)
             {
                 expendArray();
             }
 
-            for (int i = count; index < i && i - 1 > 0; i--)
+            for (int i = Count; index < i && i - 1 > 0; i--)
             {
                 innerArray[i] = innerArray[i - 1];
             }
@@ -117,32 +113,32 @@ namespace AntonioStd.Collections.List
 
         public void Remove(int index)
         {
-            if (count < index)
+            if (Count < index)
             {
-                throw new IndexOutOfRangeException($"Invalid index Argument. Expected 0 < index > {count}. Actual index = {index}");
+                throw new IndexOutOfRangeException($"Invalid index Argument. Expected 0 < index > {Count}. Actual index = {index}");
             }
 
-            for (var i = index; i < count && i + 1 < innerArray.Length; i++)
+            for (var i = index; i < Count && i + 1 < innerArray.Length; i++)
             {
                 innerArray[i] = innerArray[i + 1];
             }
 
-            count--;
+            Count--;
         }
 
-        public T[] ToArray()
+        public override T[] ToArray()
         {
-            T[] array = new T[count];
-            Array.Copy(innerArray, 0, array, 0, count);
+            T[] array = new T[Count];
+            Array.Copy(innerArray, 0, array, 0, Count);
 
             return array;
         }
 
         public void Set(int index, T value)
         {
-            if (index > count || index < 0)
+            if (index > Count || index < 0)
             {
-                throw new IndexOutOfRangeException($"Invalid index Argument. Expected 0 < index > {count}. Actual index = {index}");
+                throw new IndexOutOfRangeException($"Invalid index Argument. Expected 0 < index > {Count}. Actual index = {index}");
             }
 
             innerArray[index] = value;
@@ -150,64 +146,12 @@ namespace AntonioStd.Collections.List
 
         public T Get(int index)
         {
-            if (index > count - 1 || index < 0)
+            if (index > Count - 1 || index < 0)
             {
-                throw new IndexOutOfRangeException($"Invalid index Argument. Expected 0 < index > {count}. Actual index = {index}");
+                throw new IndexOutOfRangeException($"Invalid index Argument. Expected 0 < index > {Count}. Actual index = {index}");
             }
 
             return innerArray[index];
-        }
-
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as ArrayList<T>);
-        }
-
-        public bool Equals(ArrayList<T> other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (count != other.count)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < count; i++)
-            {
-                if (!Equals(innerArray[i], other.innerArray[i]))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public override int GetHashCode()
-        {
-            return 1;
-        }
-
-        public override string ToString()
-        {
-            StringBuilder stringBuilder = new StringBuilder($"({count})[");
-
-            for (int i = 0; i < count; i++)
-            {
-                if (i < count - 1)
-                {
-                    stringBuilder.Append(innerArray[i]).Append(", ");
-                }
-                else
-                {
-                    stringBuilder.Append(innerArray[i]);
-                }
-            }
-
-            return stringBuilder.Append("]").ToString();
         }
 
         class ArrayListIterator<E> : AbstractForwardIterator<E>
@@ -221,7 +165,7 @@ namespace AntonioStd.Collections.List
 
             public override bool HasNext()
             {
-                return Index < elements.Count();
+                return Index < elements.Count;
             }
 
             protected override E InternalNext()

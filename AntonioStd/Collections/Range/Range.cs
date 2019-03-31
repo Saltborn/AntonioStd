@@ -7,11 +7,20 @@ using System.Threading.Tasks;
 
 namespace AntonioStd.Collections.Range
 {
-    public class Range : IRange, IEquatable<Range>
+    public class Range : AbstractCollection<int>, IRange
     {
         public int Start { get; }
 
         public int End { get; }
+
+        public override int Count
+        {
+            get
+            {
+                return End + 1 - Start;
+            }
+            protected set { }
+        }
 
         protected internal Range(int start, int end)
         {
@@ -25,6 +34,7 @@ namespace AntonioStd.Collections.Range
             {
                 throw new ArgumentException($"End should be less or equal to the Start. Current: start = $start, end = $end");
             }
+
             return new Range(start, end);
         }
 
@@ -37,6 +47,7 @@ namespace AntonioStd.Collections.Range
             {
                 throw new ArgumentException($"End should be less or equal to the Start. Current: start = $start, end = $end");
             }
+
             return new Range(realStart, realEnd);
         }
 
@@ -48,6 +59,7 @@ namespace AntonioStd.Collections.Range
             {
                 throw new ArgumentException($"End should be less or equal to the Start. Current: start = $start, end = $end");
             }
+
             return new Range(start, realEnd);
         }
 
@@ -59,58 +71,19 @@ namespace AntonioStd.Collections.Range
             {
                 throw new ArgumentException($"End should be less or equal to the Start. Current: start = $start, end = $end");
             }
+
             return new Range(realSrart, end);
         }
 
-        public bool Contains(int value)
+        public override bool Contains(int value)
         {
             return value >= Start && value <= End;
         }
 
-        public int Count()
-        {
-            return End - Start + 1;
-        }
-
-        public IIterator<int> GetIterator()
+        public override IIterator<int> GetIterator()
         {
             return new RangeIterator(Start, End);
-        }
-
-        public int[] ToArray()
-        {
-            int[] array = new int[Count()];
-            IIterator<int> iterator = this.GetIterator();
-            int counter = 0;
-
-            while (iterator.HasNext())
-            {
-                array[counter] = iterator.Next();
-                counter++;
-            }
-
-            return array;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as Range);
-        }
-
-        public bool Equals(Range other)
-        {
-            return other != null &&
-                   Start == other.Start &&
-                   End == other.End;
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = -1676728671;
-            hashCode = hashCode * -1521134295 + Start.GetHashCode();
-            hashCode = hashCode * -1521134295 + End.GetHashCode();
-            return hashCode;
-        }
+        }      
 
         private class RangeIterator : AbstractForwardIterator<int>
         {
