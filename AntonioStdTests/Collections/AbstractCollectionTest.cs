@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace AntonioStdTests.Collections.Test
 {
     [TestClass]
-    public abstract class AbstractCollectionTest<T> where T: ICollection<int>
+    public abstract class AbstractCollectionTest<T> where T : ICollection<int>
     {
         [TestMethod()]
         public void GivenCollection_WhenToArray_ThenRangeIsArrayed()
@@ -38,6 +38,14 @@ namespace AntonioStdTests.Collections.Test
 
                 Assert.AreEqual(counter++, currentElement);
             }
+        }
+
+        [TestMethod()]
+        public void GivenCollection_WhenForEach_ThenResult()
+        {
+            int counter = 0;
+
+            CrateTestInstance().ForEach(i => Assert.AreEqual(counter++, i));
         }
 
         [TestMethod()]

@@ -9,5 +9,7 @@ namespace AntonioStd.Collections
     public interface IIterable<T>
     {
         IIterator<T> GetIterator();
+
+        void ForEach(Action<T> action);       
     }
 }

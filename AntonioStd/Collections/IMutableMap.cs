@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AntonioStd.Collections
 {
-    public interface IMutableMap<K, T> : IMap<K, T>, IMutableCollection<T>
+    public interface IMutableMap<K, T> : IMap<K, T>, IMutableCollection<Tuple<K,T>>
     {
         IMutableMap<K, T> Put(K key, T value);
     }

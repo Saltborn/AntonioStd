@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\AbstractCollection.cs" />
+    <Compile Include="Collections\AbstractIterable.cs" />
     <Compile Include="Collections\ICollection.cs" />
     <Compile Include="Collections\IImmutableCollection.cs" />
     <Compile Include="Collections\IMutableList.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Collections\Iterator\AbstractReverseIterator.cs" />
     <Compile Include="Collections\List\ArrayList.cs" />
     <Compile Include="Collections\List\LinkedList.cs" />
+    <Compile Include="Collections\Map\HashTable.cs" />
     <Compile Include="Collections\Range\Range.cs" />
     <Compile Include="Collections\Iterator\AbstarctIterator.cs" />
     <Compile Include="Collections\Iterator\AbstractForwardIterator.cs" />

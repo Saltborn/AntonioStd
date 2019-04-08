@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AntonioStd.Collections
 {
-    public abstract class AbstractCollection<T> : ICollection<T>
+    public abstract class AbstractCollection<T> : AbstractIterable<T>, ICollection<T>
     {
         public abstract int Count { get; protected set; }
 
@@ -38,8 +38,6 @@ namespace AntonioStd.Collections
 
             return array;
         }
-
-        public abstract IIterator<T> GetIterator();
 
         public override string ToString()
         {

@@ -14,6 +14,12 @@ namespace AntonioStd.Collections.List
         private T[] innerArray;
         public override int Count { get; protected set; }
 
+        public ArrayList(int count)
+        {
+            Count = count;
+            T[] innerArray = new T[count];
+        }
+
         private ArrayList(T[] innerArray, int count)
         {
             this.innerArray = innerArray;
