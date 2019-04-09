@@ -1,4 +1,5 @@
 ﻿using AntonioStd.Collections.List;
+using AntonioStd.Collections.Range;
 using System;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AntonioStd.Collections.Map
 {
-    public class HashTable<K, T> : AbstractCollection<Tuple<K, T>>, IMutableMap<K, T>
+    public class HashTable<K, T> : AbstractMap<K, T>, IMutableMap<K, T>
     {
         private LinkedList<Tuple<K, T>>[] table;
 
@@ -24,40 +25,7 @@ namespace AntonioStd.Collections.Map
             table = new LinkedList<Tuple<K, T>>[Count];
         }
 
-        public bool ContainsKey(K key)
-        {
-            var iterator = table[GetIndex(key)]?.GetIterator();
-
-            while (iterator?.HasNext() ?? false)
-            {
-                if (Equals(iterator.Next().Item1, key))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public bool ContainsValue(T value)
-        {
-            foreach (var list in table)
-            {
-                var iterator = list?.GetIterator();
-
-                while (iterator?.HasNext() ?? false)
-                {
-                    if (Equals(iterator.Next().Item2, value))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        public T Get(K key)
+        public override T Get(K key)
         {
             var iterator = table[GetIndex(key)]?.GetIterator();
 

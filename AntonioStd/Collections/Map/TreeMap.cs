@@ -1,4 +1,5 @@
-﻿using AntonioStd.Collections.Range;
+﻿using AntonioStd.Collections.List;
+using AntonioStd.Collections.Range;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AntonioStd.Collections.Map
 {
-    class TreeMap<K, T> : AbstractMap<K, T>, IMutableMap<K, T>
+    public class TreeMap<K, T> : AbstractMap<K, T>, IMutableMap<K, T>
     {
         private Node<K, T> root;
         private IComparer<K> comparer;
@@ -50,7 +51,11 @@ namespace AntonioStd.Collections.Map
 
         public override IIterator<Tuple<K, T>> GetIterator()
         {
-            throw new NotImplementedException();
+            var list = Collections.List.LinkedList<Tuple<K, T>>.Of();
+
+            DepthFirstSearch((k, v) => list.Add(new Tuple<K, T>(k, v)));
+
+            return list.GetIterator();
         }
 
         public IMutableMap<K, T> Put(K key, T value)
@@ -58,9 +63,9 @@ namespace AntonioStd.Collections.Map
 
             void innerPut(Node<K, T> currentNode)
             {
-                if(currentNode == null)
+                if (currentNode == null)
                 {
-                    currentNode = new Node<K, T>(key, value);
+                    root = new Node<K, T>(key, value);
                 }
                 else if ((comparer.Compare(key, currentNode.Key)) == 0)
                 {
@@ -81,13 +86,17 @@ namespace AntonioStd.Collections.Map
                 else if (comparer.Compare(key, currentNode.Key) > 0)
                 {
                     innerPut(currentNode.Right);
-                }                
+                }
             }
+
+            innerPut(root);
+
+            Count++;
 
             return this;
         }
 
-        public void DepthFirstSearch (Action<K, T> action)
+        public void DepthFirstSearch(Action<K, T> action)
         {
             void innerSearch(Node<K, T> currentNode)
             {
@@ -100,6 +109,30 @@ namespace AntonioStd.Collections.Map
 
                 innerSearch(currentNode.Left);
                 innerSearch(currentNode.Right);
+            }
+
+            innerSearch(root);
+        }
+
+        public void BreadthFirstSearch(Action<K, T> action)
+        {
+            var queue = new LinkedListQueue<Node<K, T>>().Enqueue(root);
+
+            while (!queue.IsEmprty())
+            {
+                var currentNode = queue.Dequeue();
+
+                action.Invoke(currentNode.Key, currentNode.Value);
+
+                if (!queue.Contains(currentNode.Left) && currentNode.Left == null)
+                {
+                    queue.Enqueue(currentNode.Left);
+                }
+
+                if (!queue.Contains(currentNode.Right) && currentNode.Right == null)
+                {
+                    queue.Enqueue(currentNode.Right);
+                }
             }
         }
 

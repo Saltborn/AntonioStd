@@ -11,6 +11,31 @@ namespace AntonioStd.Collections.List
     {
         private Node<T> head;
         private Node<T> tail;
+
+        public T Head
+        {
+            get
+            {
+                if (head != null)
+                {
+                    return head.Value;
+                }
+                return default(T);
+            }
+        }
+
+        public T Tail
+        {
+            get
+            {
+                if (tail != null)
+                {
+                    return tail.Value;
+                }
+                return default(T);
+            }
+        }
+
         public override int Count { get; protected set; }
 
         private LinkedList(Node<T> head, Node<T> tail, int count)

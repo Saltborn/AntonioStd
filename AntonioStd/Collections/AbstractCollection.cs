@@ -98,5 +98,10 @@ namespace AntonioStd.Collections
 
             return hashCode;
         }
+
+        public bool IsEmprty()
+        {
+            return Count == 0;
+        }
     }
 }

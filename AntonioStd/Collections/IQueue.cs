@@ -10,7 +10,7 @@ namespace AntonioStd.Collections
     {
         T Peek();
 
-        T Enqueue(T value);
+        IQueue<T> Enqueue(T value);
 
         T Dequeue();
     }

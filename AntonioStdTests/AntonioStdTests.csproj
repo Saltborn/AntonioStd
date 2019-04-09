@@ -60,11 +60,14 @@
     <Compile Include="Collections\List\AbstractImmutableListTest.cs" />
     <Compile Include="Collections\List\AbstractMutableListTest.cs" />
     <Compile Include="Collections\List\ArrayListTests.cs" />
+    <Compile Include="Collections\List\LinkedListQueueTests.cs" />
     <Compile Include="Collections\List\LinkedListTests.cs" />
     <Compile Include="Collections\AbstractMutableCollectionTest.cs" />
     <Compile Include="Collections\Map\AbstractMapTests.cs" />
     <Compile Include="Collections\Map\HashTableTests.cs" />
+    <Compile Include="Collections\Map\TreeMapTests.cs" />
     <Compile Include="Collections\Range\RangeTests.cs" />
+    <Compile Include="Collections\Stack\StackTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

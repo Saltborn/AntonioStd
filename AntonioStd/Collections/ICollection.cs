@@ -13,5 +13,7 @@ namespace AntonioStd.Collections
         bool Contains(T value);
 
         T[] ToArray();
+
+        bool IsEmprty();
     }
 }
