@@ -8,5 +8,6 @@ namespace AntonioStd.Collections
 {
     public interface IMutableSet<T> : ISet<T>, IMutableCollection<T>
     {
+        IMutableSet<T> Add(T value);
     }
 }

@@ -67,6 +67,8 @@
     <Compile Include="Collections\Map\HashTableTests.cs" />
     <Compile Include="Collections\Map\TreeMapTests.cs" />
     <Compile Include="Collections\Range\RangeTests.cs" />
+    <Compile Include="Collections\Set\AbstractSetTests.cs" />
+    <Compile Include="Collections\Set\TreeSet.cs" />
     <Compile Include="Collections\Stack\StackTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

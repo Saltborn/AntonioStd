@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Collections\AbstractCollection.cs" />
     <Compile Include="Collections\AbstractIterable.cs" />
+    <Compile Include="Collections\AbstractSet.cs" />
     <Compile Include="Collections\ICollection.cs" />
     <Compile Include="Collections\IImmutableCollection.cs" />
     <Compile Include="Collections\IMutableList.cs" />
@@ -64,6 +65,8 @@
     <Compile Include="Collections\Iterator\AbstarctIterator.cs" />
     <Compile Include="Collections\Iterator\AbstractForwardIterator.cs" />
     <Compile Include="Collections\Iterator\ZippedIterator.cs" />
+    <Compile Include="Collections\Set\HashSet.cs" />
+    <Compile Include="Collections\Set\TreeSet.cs" />
     <Compile Include="Collections\Stack\Stack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Collections\ISet.cs" />
